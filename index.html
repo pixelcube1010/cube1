@@ -1,4 +1,6 @@
 <title>오행 궁합소</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="생일과 MBTI로 나의 천간 카드를 뽑고 친구와 천생연분 점수를 재는 무료 궁합 테스트">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,7 +60,12 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(16
 @keyframes holo{0%{background-position:0% 0%}100%{background-position:250% 250%}}
 .card .rare{position:absolute;z-index:7;top:75%;left:50%;transform:translateX(-50%);font-family:var(--head);font-size:10px;color:#fff;padding:2px 10px;border-radius:10px;white-space:nowrap}
 .card .nick{position:absolute;z-index:7;bottom:12%;left:50%;transform:translateX(-50%);width:80%;text-align:center;font-family:var(--round);font-size:17px;line-height:1;white-space:nowrap}
-.clab{text-align:center;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:14px}
+.clab{text-align:center;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:10px}
+.combohdr{text-align:center;margin-bottom:14px}
+.combohdr .full{font-family:var(--round);font-size:21px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.3}
+.combohdr .combo{font-size:12px;color:var(--muted);font-weight:700;margin-top:3px}
+.axis{margin-top:11px;padding-top:11px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.8}
+.axis b{color:var(--accent)}
 .statbar{display:flex;gap:7px;max-width:280px;margin:9px auto 0}
 .stat{flex:1;background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:8px 2px;text-align:center;box-shadow:0 3px 11px rgba(90,60,140,.07)}
 .stat span{display:block;font-size:9.5px;color:var(--muted);font-weight:700;margin-bottom:1px}
@@ -92,8 +99,30 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(16
 .ad{background:var(--bg);border:1px dashed var(--line);border-radius:16px;padding:16px;text-align:center;color:var(--muted);font-size:12px;margin:16px 0}
 .foot{text-align:center;color:var(--muted);font-size:12px;margin-top:22px;line-height:1.7}
 .hidden{display:none!important}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:12px 22px;border-radius:24px;font-size:13px;font-weight:700;opacity:0;transition:opacity .3s;z-index:9;pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:12px 22px;border-radius:24px;font-size:13px;font-weight:700;opacity:0;transition:opacity .3s;z-index:9;pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:88vw;text-align:center}
 .toast.show{opacity:1}
+
+/* ===== 📱 모바일 최적화 ===== */
+@media(max-width:430px){
+  .wrap{padding:20px 13px 48px}
+  .head h1{font-size:26px}
+  .card-ui{padding:19px 16px;border-radius:20px}
+  .mbti-grid{gap:6px}
+  .mbti-grid button{padding:10px 2px;font-size:12px;border-radius:10px}
+  input,select{font-size:16px;padding:12px}            /* 16px: iOS 확대방지 */
+  .seg button{font-size:14px;padding:12px}
+  .go{font-size:17px;padding:16px}
+  .card{max-width:72vw}
+  .combohdr .full{font-size:18px}
+  .punch,.sec{font-size:13.5px;padding:13px 15px}
+  .tools button{min-width:0;flex:1 1 30%;padding:12px 6px;font-size:13px}
+  .score-big .n{font-size:54px}
+  .vs .mini{max-width:40vw}
+}
+@media(max-width:340px){
+  .mbti-grid button{font-size:11px;padding:9px 1px}
+  .statbar .stat b{font-size:16px}
+}
 </style>
 
 <button class="theme-btn" id="themeBtn" aria-label="테마 전환">◐</button>
@@ -114,7 +143,10 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(16
   <!-- 내 카드 결과 -->
   <div class="result" id="myResult">
     <div id="myCardWrap"></div>
+    <div class="combohdr" id="comboHdr"></div>
     <div class="punch" id="myPunch"></div>
+    <div class="sec"><b>🧬 MBTI 기질</b><span id="myMbti"></span></div>
+    <div class="sec"><b id="starLbl">⭐ 별자리</b><span id="myStar"></span></div>
     <div class="sec"><b>😤 킹받는 순간</b><span id="myRage"></span></div>
     <div class="sec"><b>💕 연애할 때</b><span id="myLove"></span></div>
     <div class="sec sw"><div><b>⚡ 강점</b><span id="myStr"></span></div><div><b>💧 약점</b><span id="myWeak"></span></div></div>
@@ -223,15 +255,61 @@ function statBar(g){return `<div class="statbar">`+STAT[g].map((v,i)=>`<div clas
 const MBTI=['INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISFJ','ESTJ','ESFJ','ISTP','ISFP','ESTP','ESFP'];
 const MBTI_PCT={ISFJ:14,ESFJ:12,ISTJ:12,ISFP:9,ESTJ:8,ESFP:7,ENFP:7,ISTP:5,INFP:4,ESTP:4,INTP:3,ENTP:3,ENFJ:2.5,INTJ:2,ENTJ:1.8,INFJ:1.5};
 
+// ===== ⭐ 별자리 (태양궁, 생일로 공짜 계산) =====
+// el: 0불 1흙 2공기 3물
+const ZOD=[
+ {n:'양자리',e:'♈',el:0,line:'시동 걸리면 브레이크 없는 선봉장'},
+ {n:'황소자리',e:'♉',el:1,line:'느긋한데 한번 정하면 소도 못 말림'},
+ {n:'쌍둥이자리',e:'♊',el:2,line:'머리 회전 빠르고 변덕도 빠름'},
+ {n:'게자리',e:'♋',el:3,line:'정 많고 내 사람 챙기는 보호본능'},
+ {n:'사자자리',e:'♌',el:0,line:'주인공 기질, 무대 중앙이 내 자리'},
+ {n:'처녀자리',e:'♍',el:1,line:'디테일 집착 완벽주의 검수왕'},
+ {n:'천칭자리',e:'♎',el:2,line:'균형·조화 추구, 결정은 좀 느림'},
+ {n:'전갈자리',e:'♏',el:3,line:'한번 꽂히면 끝까지, 뒤끝 지림'},
+ {n:'사수자리',e:'♐',el:0,line:'자유·확장, 어디로 튈지 모름'},
+ {n:'염소자리',e:'♑',el:1,line:'현실주의 야망가, 묵묵히 정상까지'},
+ {n:'물병자리',e:'♒',el:2,line:'독특한 아웃사이더, 남 눈치 안 봄'},
+ {n:'물고기자리',e:'♓',el:3,line:'감성·공감 끝판왕, 현실감은 흐림'}
+];
+const EL_KR=['불','흙','공기','물'];
+function zodiac(m,d){
+  // [경계일, 그날이상이면 해당 궁 idx] — 미만이면 직전 궁
+  const t=[[20,10],[19,11],[21,0],[20,1],[21,2],[22,3],[23,4],[23,5],[23,6],[24,7],[23,8],[22,9]];
+  const [cut,idx]=t[m-1]; return d<cut?(idx+11)%12:idx;}
+// ===== 🧬 MBTI 16 수식어 (형용사 + 행동 한 줄) =====
+const MBTI_MOD={
+ INTJ:{adj:'전략가',line:'머릿속에 10년치 시뮬 돌려놓고 혼자 결론 내는 타입'},
+ INTP:{adj:'뇌내망상',line:'분석은 신인데 실행은 내일의 나한테 떠넘김ㅋㅋ'},
+ ENTJ:{adj:'지휘관',line:'계획 이미 다 짜놨으니 넌 따라오기만 하면 됨'},
+ ENTP:{adj:'논쟁러',line:'토론으로 이기려다 사람 잃는 재주의 소유자'},
+ INFJ:{adj:'은근상담소',line:'남 고민 다 받아주고 자기 고민은 혼자 삭임'},
+ INFP:{adj:'감성몽상가',line:'머릿속 세계관은 대서사인데 밖에선 조용'},
+ ENFJ:{adj:'오지랖리더',line:'다 챙기다 정작 본인이 번아웃 오는 스타일'},
+ ENFP:{adj:'관종불꽃',line:'아이디어 폭죽인데 마무리는 바람과 함께 사라짐'},
+ ISTJ:{adj:'원칙주의',line:'규칙은 규칙이야. 융통성? 그게 뭔데ㅋㅋ'},
+ ISFJ:{adj:'헌신집사',line:'티 안 내고 다 해주고 생색도 안 내는 보살'},
+ ESTJ:{adj:'불도저관리자',line:'일 되게 만드는 추진력, 근데 가끔 꼰대'},
+ ESFJ:{adj:'분위기메이커',line:'다 챙기는데 인정 못 받으면 서운폭발'},
+ ISTP:{adj:'쿨한장인',line:'말보다 손이 먼저, 관심 없으면 그냥 무시'},
+ ISFP:{adj:'마이페이스예술혼',line:'겉은 순한데 선 넘으면 조용히 손절'},
+ ESTP:{adj:'행동대장',line:'생각보다 몸이 먼저 나가는 돌격형'},
+ ESFP:{adj:'인싸파티피플',line:'지금 이 순간이 제일 중요한 사람ㅋㅋ'}
+};
+
 function seed(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
 function build(info){
   const g=dayGan(info.y,info.m,info.d), oh=GAN_OH[g], ohn=OH_NAME[oh], t=TG[g];
+  const zi=zodiac(info.m,info.d), z=ZOD[zi];
+  const mod=MBTI_MOD[info.mbti]||{adj:'미지의',line:''};
   const s=seed(info.birth+info.mbti);
   let pct=MBTI_PCT[info.mbti]||5; pct=Math.max(1,pct+((s%5)-2)*0.6);
   let grade,gt; if(pct<=3){grade='SSR';gt='초희귀🌟'}else if(pct<=7){grade='SR';gt='희귀💎'}else if(pct<=13){grade='SR';gt='레어✨'}else{grade='R';gt='국민🍀'}
-  return {g,oh,ohn,t,gan:GAN[g],ganKR:GAN_KR[g],
+  // 곱하기 풀네임: {MBTI수식어} {천간별명}
+  const full=mod.adj+' '+t.nick;
+  return {g,oh,ohn,t,gan:GAN[g],ganKR:GAN_KR[g],zi,z,mod,full,mbti:info.mbti,
     rare:grade+'·상위'+Math.round(pct)+'%',
-    lab:OH_EMOJI[oh]+' '+OH_KR[oh]+'·'+GAN[g]+'·'+info.mbti};
+    combo:GAN[g]+OH_KR[oh]+' × '+info.mbti+' × '+z.e+z.n,
+    lab:OH_EMOJI[oh]+' '+OH_KR[oh]+'·'+GAN[g]+'·'+info.mbti+'·'+z.n};
 }
 function cardHTML(c,mini){
   const o=OH[c.ohn], sz=mini?'':'';
@@ -250,8 +328,19 @@ function cardHTML(c,mini){
 function ohRel(a,b){if(a===b)return{s:70,r:'같은 기운'};const sh=(a+1)%5===b||(b+1)%5===a;const ke={0:2,2:4,4:1,1:3,3:0};
   if(sh)return{s:92,r:'서로 살려주는 상생'};if(ke[a]===b||ke[b]===a)return{s:48,r:'서로 밀당하는 상극'};return{s:65,r:'무난한 사이'}}
 function mbtiSc(a,b){let sm=0;for(let i=0;i<4;i++)if(a[i]===b[i])sm++;let bn=0;if(a[1]===b[1])bn+=8;if(a[2]!==b[2])bn+=6;if(a[0]!==b[0])bn+=4;return Math.min(96,([52,58,64,72,80][sm]||66)+bn)}
-function compat(A,B){const cA=build(A),cB=build(B);const om=ohRel(cA.oh,cB.oh),mm=mbtiSc(A.mbti,B.mbti);
-  const s=seed(A.birth+A.mbti+'x'+B.birth+B.mbti);let sc=Math.round(om.s*0.55+mm*0.45);sc=Math.max(41,Math.min(99,sc+(s%9)-4));return{sc,om,mm,cA,cB}}
+// 별자리 원소 궁합 (0불1흙2공기3물)
+function elRel(a,b){if(a===b)return{s:80,r:'같은 원소'};
+  const tri=(a==0&&b==2)||(a==2&&a!=b&&b==0)||(a==1&&b==3)||(a==3&&b==1); // 불-공기, 흙-물 상생
+  if((a==0&&b==2)||(a==2&&b==0)||(a==1&&b==3)||(a==3&&b==1))return{s:90,r:'찰떡 원소'};
+  if((a==0&&b==3)||(a==3&&b==0))return{s:52,r:'불vs물'}; // 상극
+  if((a==1&&b==2)||(a==2&&b==1))return{s:55,r:'흙vs공기'};
+  return{s:66,r:'무난 원소'}}
+function compat(A,B){const cA=build(A),cB=build(B);
+  const om=ohRel(cA.oh,cB.oh), mm=mbtiSc(A.mbti,B.mbti), em=elRel(cA.z.el,cB.z.el);
+  const s=seed(A.birth+A.mbti+'x'+B.birth+B.mbti);
+  // 3축 가중: 오행 40 + MBTI 35 + 별자리 25
+  let sc=Math.round(om.s*0.40+mm*0.35+em.s*0.25);
+  sc=Math.max(41,Math.min(99,sc+(s%7)-3));return{sc,om,mm,em,cA,cB}}
 function matchLine(sc,om){if(sc>=90)return '천생연분 🔥 '+om.r+'이라 만나면 시너지 폭발. 이 조합 놓치면 손해ㅋㅋ';
   if(sc>=75)return '꽤 잘 맞아 💫 '+om.r+'. 티격태격해도 결국 붙어있을 케미';
   if(sc>=60)return '나쁘지 않아 🙂 '+om.r+'이라 노력하면 좋아지는 사이';
@@ -274,7 +363,11 @@ function showMy(info){
   myInfo=info;try{localStorage.setItem('gh-me',JSON.stringify(info))}catch(e){}
   const c=build(info);
   $('myCardWrap').innerHTML=cardHTML(c)+statBar(c.g)+tagRow(c.g)+`<div class="clab">${c.lab}</div>`;
+  $('comboHdr').innerHTML=`<div class="full">🎴 "${c.full}"</div><div class="combo">${c.combo}</div>`;
   $('myPunch').innerHTML='💥 '+c.t.punch;
+  $('myMbti').innerHTML=`<b style="color:var(--fg)">${c.mod.adj}</b> — ${c.mod.line}`;
+  $('starLbl').textContent=`${c.z.e} ${c.z.n} (${EL_KR[c.z.el]})`;
+  $('myStar').textContent=c.z.line;
   $('myRage').textContent=RAGE[c.g];
   $('myLove').textContent=c.t.love;$('myStr').textContent=c.t.str;$('myWeak').textContent=c.t.weak;
   $('myJob').textContent=JOB[c.g];$('myYear').textContent=YEAR[c.g];
@@ -285,8 +378,10 @@ function showMatch(A,B){
   const r=compat(A,B);
   $('vsRow').innerHTML=`<div class="mini">${cardHTML(r.cA,1)}</div><div class="heart">💗</div><div class="mini">${cardHTML(r.cB,1)}</div>`;
   $('scoreN').innerHTML=r.sc+'<small>점</small>';
-  $('scoreLbl').textContent=r.om.r+' · MBTI '+(r.mm>=75?'찰떡':r.mm>=60?'무난':'상극매력');
-  $('matchPunch').innerHTML='💘 '+matchLine(r.sc,r.om);
+  $('scoreLbl').textContent=r.sc>=85?'천생연분급 💖':r.sc>=70?'꽤 잘 맞음 💫':r.sc>=55?'노력하면 굿 🙂':'극과극 매력 🌗';
+  const bar=v=>v>=85?'🟢':v>=65?'🟡':'🔴';
+  $('matchPunch').innerHTML='💘 '+matchLine(r.sc,r.om)
+    +`<div class="axis">${bar(r.om.s)} <b>오행</b> ${r.om.r} · ${bar(r.mm)} <b>MBTI</b> ${r.mm>=75?'찰떡':r.mm>=60?'무난':'상극매력'} · ${bar(r.em.s)} <b>별자리</b> ${r.em.r}</div>`;
   setTimeout(()=>$('gaugeFill').style.width=r.sc+'%',100);
   $('inputCard').classList.add('hidden');$('myResult').classList.remove('show');$('matchResult').classList.add('show');
   window.scrollTo({top:0,behavior:'smooth'});
