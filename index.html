@@ -12,14 +12,14 @@
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161320;--bg2:#141a26;--bg3:#1e1522;--surface:#221f30;--fg:#efeaf7;--muted:#9990ad;--line:#332c44;--accent:#b791f2;--accent2:#ff9cc0;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#161320;--bg2:#141a26;--bg3:#1e1522;--surface:#221f30;--fg:#efeaf7;--muted:#9990ad;--line:#332c44;--accent:#b791f2;--accent2:#ff9cc0;color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;color:var(--fg);font-family:var(--sans);line-height:1.6;
+body{margin:0;color:var(--fg);font-family:var(--sans);line-height:1.6;-webkit-text-size-adjust:100%;text-size-adjust:100%;
   background:
     radial-gradient(1200px 500px at 15% -8%,rgba(255,150,200,.28),transparent 60%),
     radial-gradient(1000px 460px at 92% 8%,rgba(140,190,255,.26),transparent 60%),
     radial-gradient(900px 500px at 50% 118%,rgba(180,150,255,.24),transparent 60%),
     linear-gradient(160deg,var(--bg),var(--bg2) 52%,var(--bg3));
   background-attachment:fixed;min-height:100vh}
-.wrap{max-width:460px;margin:0 auto;padding:26px 16px 60px}
+.wrap{max-width:460px;margin:0 auto;padding:36px 16px 60px}
 .theme-btn{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:14px;background:var(--surface);border:1px solid var(--line);color:var(--fg);width:38px;height:38px;border-radius:12px;cursor:pointer;font-size:16px;box-shadow:0 4px 12px rgba(80,50,120,.12)}
 .head{text-align:center;margin-bottom:20px}
 .head .badge{display:inline-block;font-family:var(--round);font-size:11.5px;color:#fff;background:linear-gradient(90deg,var(--accent),var(--accent2));padding:4px 13px;border-radius:20px;letter-spacing:.04em;box-shadow:0 4px 14px rgba(160,110,220,.35);margin-bottom:10px}
@@ -28,12 +28,31 @@ body{margin:0;color:var(--fg);font-family:var(--sans);line-height:1.6;
 .head p{margin:0;color:var(--muted);font-size:13px}
 
 .card-ui{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:24px 22px;box-shadow:0 2px 8px rgba(60,40,90,.06),0 16px 40px rgba(90,60,140,.12);margin-bottom:18px;overflow:hidden}
+.modetab{display:flex;gap:8px;margin-bottom:16px}
+.modetab button{flex:1;background:var(--surface);border:1.5px solid var(--line);color:var(--muted);border-radius:14px;padding:12px;cursor:pointer;font-family:var(--round);font-size:15px}
+.modetab button[aria-pressed="true"]{background:linear-gradient(135deg,#9b6ae4,#7d5fe0);color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(130,90,220,.28)}
+.ghelp{margin:0 0 14px;font-size:13px;color:var(--muted);text-align:center}
+.gmember{display:grid;grid-template-columns:1fr 1.3fr auto auto auto;gap:6px;align-items:center;margin-bottom:9px}
+.gmember input,.gmember select{margin:0;padding:9px 8px;font-size:13px;border-radius:10px}
+.gmember .grm{background:var(--bg);border:1.5px solid var(--line);color:var(--muted);border-radius:10px;width:34px;height:38px;cursor:pointer;font-size:14px}
+.gadd{width:100%;background:var(--bg);border:1.5px dashed var(--accent2);color:var(--accent);border-radius:12px;padding:12px;font-family:var(--round);font-size:14px;cursor:pointer;margin-bottom:12px}
+.gteam{text-align:center;margin-bottom:6px}
+.gteam .n{font-family:var(--round);font-size:40px;line-height:1;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.gteam .l{font-size:13px;color:var(--muted);font-weight:700;margin-top:2px}
+.gnm{fill:var(--fg);font-family:var(--sans)}
+.gseclab{font-family:var(--round);font-size:15px;margin-bottom:10px}
+.prow{display:flex;justify-content:space-between;align-items:center;padding:9px 11px;border-radius:11px;background:var(--bg);margin-bottom:7px;font-size:14px}
+.prow small{color:var(--muted);margin:0 2px}
+.prow b{font-family:var(--round);font-size:18px}
+.prow .tag{font-size:10px;color:var(--muted);margin-left:6px}
 .card-ui::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#8fd6a0,#ffd36b,#ff9ab0,#a99cf0,#8fc4f0);background-size:220% 100%;animation:sheen 5s linear infinite}
 @keyframes sheen{0%{background-position:0% 0}100%{background-position:220% 0}}
 label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}
 label .em{color:var(--accent);margin-right:4px}
 input,select{width:100%;background:var(--bg);border:1.5px solid var(--line);color:var(--fg);border-radius:14px;padding:13px 14px;font-family:var(--sans);font-size:15px;margin-bottom:17px;transition:border-color .15s}
 input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(160,113,224,.16)}
+#birth{padding-right:24px}
+input[type=date]::-webkit-calendar-picker-indicator{cursor:pointer;opacity:.75}
 .seg{display:flex;gap:8px;margin-bottom:17px}
 .seg button{flex:1;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;color:var(--muted);padding:13px;cursor:pointer;font-family:var(--sans);font-size:15px;font-weight:700;transition:.12s}
 .seg button[aria-pressed="true"]{background:linear-gradient(135deg,#9b6ae4,#7d5fe0);color:#fff;border-color:transparent;box-shadow:0 6px 16px rgba(130,90,220,.3)}
@@ -51,19 +70,30 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(16
 .result{display:none}.result.show{display:block;animation:pop .45s cubic-bezier(.2,.9,.3,1.2)}
 @keyframes pop{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:none}}
 .card{position:relative;width:100%;max-width:280px;margin:0 auto 4px;border-radius:5.5%;overflow:hidden;filter:drop-shadow(0 10px 26px rgba(120,70,160,.3))}
-.card .bg{position:absolute;inset:0;z-index:0}
+/* 오타원 뒤 배경: 구멍보다 크게 꽉 채움(넘침은 프레임이 가림) → 저장시 구멍 안 남음 */
+.card .bg{position:absolute;z-index:0;left:13%;right:13%;top:19%;height:66%;border-radius:50%/44%}
+.card .zbg{position:absolute;z-index:1;left:22%;right:22%;top:22%;width:56%;pointer-events:none}
+/* 캐릭터: 프레임 뒤 오타원, 밑선 정렬 */
+.card .char{position:absolute;z-index:2;left:21%;right:21%;bottom:26%;height:50%;display:flex;align-items:flex-end;justify-content:center;pointer-events:none}
+.card .char img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:bottom center;filter:drop-shadow(0 3px 7px rgba(0,0,0,.13))}
 .card .frame{display:block;width:100%;height:auto;position:relative;z-index:3;pointer-events:none}
-.card .char{position:absolute;z-index:5;left:15%;right:15%;top:34%;height:36%;display:flex;align-items:center;justify-content:center}
-.card .char img{max-width:72%;max-height:100%;object-fit:contain;filter:drop-shadow(0 3px 8px rgba(0,0,0,.18))}
-.card .holo{position:absolute;z-index:6;left:15.5%;right:15.5%;top:13%;height:57%;border-radius:48%;mix-blend-mode:screen;opacity:.38;pointer-events:none;
-  background:linear-gradient(115deg,transparent 35%,rgba(255,150,210,.7) 46%,rgba(150,220,255,.7) 54%,transparent 66%);background-size:250% 250%;animation:holo 3.6s linear infinite}
-@keyframes holo{0%{background-position:0% 0%}100%{background-position:250% 250%}}
-.card .rare{position:absolute;z-index:7;top:75%;left:50%;transform:translateX(-50%);font-family:var(--head);font-size:10px;color:#fff;padding:2px 10px;border-radius:10px;white-space:nowrap}
-.card .nick{position:absolute;z-index:7;bottom:12%;left:50%;transform:translateX(-50%);width:80%;text-align:center;font-family:var(--round);font-size:17px;line-height:1;white-space:nowrap}
+/* 흐르는 홀로: 빛 막대 2개가 화면 밖→밖으로 쓸고 지나감 (이음새 선 없음) */
+.card .holo{position:absolute;z-index:4;left:13%;right:13%;top:19%;height:66%;border-radius:50%/44%;overflow:hidden;mix-blend-mode:screen;opacity:.8;pointer-events:none}
+.card .holo::before,.card .holo::after{content:"";position:absolute;top:-30%;height:160%;width:44%;
+  background:linear-gradient(90deg,transparent,rgba(255,200,240,.46) 35%,rgba(190,225,255,.46) 65%,transparent);
+  transform:rotate(26deg);animation:shine 4.2s linear infinite}
+.card .holo::after{animation-delay:2.1s}
+@keyframes shine{0%{left:-50%}100%{left:150%}}
+.card .rare{position:absolute;z-index:5;top:10%;left:8%;font-family:var(--head);font-size:8.5px;color:#fff;padding:2px 8px;border-radius:9px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.card .rare.ssr{background:linear-gradient(100deg,#ffb33c,#ff5fa2,#9b6ae4,#5fd0ff,#ffd84a,#ffb33c);background-size:300% 100%;animation:ssrshine 2.4s linear infinite;color:#fff;text-shadow:0 1px 2px rgba(120,40,90,.5);box-shadow:0 2px 12px rgba(255,120,200,.6),0 0 0 1.5px rgba(255,255,255,.6) inset;padding:2.5px 9px}
+@keyframes ssrshine{to{background-position:300% 0}}
+.card .nick{position:absolute;z-index:5;bottom:13%;left:50%;transform:translateX(-50%);width:56%;text-align:center;font-family:var(--round);font-size:11px;line-height:1.1}
 .clab{text-align:center;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:10px}
 .combohdr{text-align:center;margin-bottom:14px}
 .combohdr .full{font-family:var(--round);font-size:21px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.3}
 .combohdr .combo{font-size:12px;color:var(--muted);font-weight:700;margin-top:3px}
+.reading{background:linear-gradient(135deg,rgba(155,106,228,.1),rgba(255,143,184,.1));border:1.5px solid var(--line);border-radius:18px;padding:18px 19px;margin-bottom:16px;font-size:15px;line-height:1.85}
+.reading b{font-family:var(--round);color:var(--accent);font-size:16px}
 .axis{margin-top:11px;padding-top:11px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.8}
 .axis b{color:var(--accent)}
 .statbar{display:flex;gap:7px;max-width:280px;margin:9px auto 0}
@@ -78,6 +108,12 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(16
 .sec{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:12px;font-size:14px;box-shadow:0 4px 14px rgba(90,60,140,.06)}
 .sec b{font-size:12.5px;color:var(--accent);display:block;margin-bottom:4px}
 .sec.sw{display:flex;gap:12px}.sec.sw>div{flex:1;min-width:0}
+.matchrow{display:flex;align-items:center;gap:13px;margin-top:5px}
+.matchrow .miniwrap{width:88px;height:152px;flex:none;position:relative;overflow:hidden}
+.matchrow .miniwrap .card{position:absolute;top:0;left:0;width:280px!important;max-width:280px!important;margin:0!important;transform:scale(.314);transform-origin:top left;filter:none}
+.matchrow .mtxt{flex:1;min-width:0}
+.matchrow .mtxt>b{font-family:var(--round);font-size:16px}
+.matchrow .msub{font-size:12.5px;color:var(--muted);margin-top:4px}
 
 .tools{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
 .tools button{flex:1;min-width:120px;background:var(--surface);border:1.5px solid var(--line);color:var(--fg);border-radius:14px;padding:14px;font-family:var(--round);font-size:14.5px;cursor:pointer;transition:.12s}
@@ -104,17 +140,21 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(16
 
 /* ===== 📱 모바일 최적화 ===== */
 @media(max-width:430px){
-  .wrap{padding:20px 13px 48px}
+  .wrap{padding:40px 13px 14px}
+  .head{margin-bottom:16px}
+  .head .badge{margin-bottom:9px}
   .head h1{font-size:26px}
-  .card-ui{padding:19px 16px;border-radius:20px}
-  .mbti-grid{gap:6px}
-  .mbti-grid button{padding:10px 2px;font-size:12px;border-radius:10px}
-  input,select{font-size:16px;padding:12px}            /* 16px: iOS 확대방지 */
-  .seg button{font-size:14px;padding:12px}
+  .card-ui{padding:18px 16px 20px;border-radius:20px;margin-bottom:14px}
+  label{margin-bottom:6px}
+  input,select{font-size:16px;padding:13px;margin-bottom:13px}  /* 16px: iOS 확대방지 */
+  .seg{margin-bottom:13px}
+  .seg button{font-size:15px;padding:13px}
+  .mbti-grid{gap:7px;margin-bottom:14px}
+  .mbti-grid button{padding:12px 2px;font-size:12.5px;border-radius:11px}
   .go{font-size:17px;padding:16px}
   .card{max-width:72vw}
   .combohdr .full{font-size:18px}
-  .punch,.sec{font-size:13.5px;padding:13px 15px}
+  .punch,.sec,.reading{font-size:13.5px;padding:13px 15px}
   .tools button{min-width:0;flex:1 1 30%;padding:12px 6px;font-size:13px}
   .score-big .n{font-size:54px}
   .vs .mini{max-width:40vw}
@@ -127,12 +167,17 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(16
 
 <button class="theme-btn" id="themeBtn" aria-label="테마 전환">◐</button>
 <div class="wrap">
-  <div class="head"><span class="badge">✨ 무료 사주 뽑기 ✨</span><h1>오행 궁합소</h1><p id="headSub">생일 + MBTI로 내 천간 카드 뽑기 🔮</p></div>
+  <div class="head"><span class="badge">✨ 랜덤 속성 카드 뽑기 ✨</span><h1>오행 궁합소</h1><p id="headSub">생일 + MBTI로 내 속성 카드 뽑기 🔮</p></div>
+
+  <div class="modetab" id="modeTab">
+    <button type="button" data-mode="solo" aria-pressed="true">🔮 내 카드</button>
+    <button type="button" data-mode="group">👥 그룹 궁합</button>
+  </div>
 
   <div class="card-ui" id="inputCard">
     <div id="friendBn" class="friendbn hidden"></div>
     <label><span class="em">🎂</span>생년월일</label>
-    <input id="birth" type="date" min="1930-01-01" max="2025-12-31">
+    <input id="birth" type="date" min="1930-01-01" max="2025-12-31" value="2000-01-01">
     <label><span class="em">🚻</span>성별</label>
     <div class="seg" id="sexSeg"><button type="button" data-sex="남" aria-pressed="true">남자</button><button type="button" data-sex="여" aria-pressed="false">여자</button></div>
     <label><span class="em">🧬</span>MBTI</label>
@@ -140,18 +185,39 @@ input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(16
     <button class="go" id="goBtn">내 카드 뽑기 ✨</button>
   </div>
 
+  <!-- 👥 그룹 입력 -->
+  <div class="card-ui hidden" id="groupCard">
+    <p class="ghelp">친구들 생일·MBTI 넣고 관계도 그리기 (2~6명)</p>
+    <div id="gList"></div>
+    <button class="gadd" id="gAddBtn">+ 사람 추가</button>
+    <button class="go" id="gGoBtn" style="margin-top:4px">관계도 그리기 🕸️</button>
+  </div>
+
+  <!-- 👥 그룹 결과 -->
+  <div class="result" id="groupResult">
+    <div class="card-ui">
+      <div class="gteam" id="gTeam"></div>
+      <svg id="gSvg" viewBox="0 0 300 300" style="width:100%;height:auto;display:block"></svg>
+    </div>
+    <div class="card-ui">
+      <div class="gseclab">💞 궁합 랭킹</div>
+      <div id="gRank"></div>
+    </div>
+    <div class="tools"><button class="primary" id="gRedoBtn">다시 입력</button></div>
+  </div>
+
   <!-- 내 카드 결과 -->
   <div class="result" id="myResult">
     <div id="myCardWrap"></div>
     <div class="combohdr" id="comboHdr"></div>
-    <div class="punch" id="myPunch"></div>
-    <div class="sec"><b>🧬 MBTI 기질</b><span id="myMbti"></span></div>
-    <div class="sec"><b id="starLbl">⭐ 별자리</b><span id="myStar"></span></div>
+    <div class="reading" id="myReading"></div>
     <div class="sec"><b>😤 킹받는 순간</b><span id="myRage"></span></div>
     <div class="sec"><b>💕 연애할 때</b><span id="myLove"></span></div>
     <div class="sec sw"><div><b>⚡ 강점</b><span id="myStr"></span></div><div><b>💧 약점</b><span id="myWeak"></span></div></div>
     <div class="sec"><b>🎯 찰떡 직업</b><span id="myJob"></span></div>
     <div class="sec"><b>🍀 2026 운세</b><span id="myYear"></span></div>
+    <div class="sec"><b>💚 잘 맞는 속성</b><div class="matchrow" id="myGood"></div></div>
+    <div class="sec"><b>💔 안 맞는 속성</b><div class="matchrow" id="myBad"></div></div>
     <div class="tools"><button class="primary" id="shareBtn">💌 친구랑 궁합</button><button id="saveBtn">📸 카드 저장</button><button id="redoBtn">다시</button></div>
   </div>
 
@@ -174,6 +240,13 @@ function jdn(y,m,d){const a=Math.floor((14-m)/12),yy=y+4800-a,mm=m+12*a-3;return
 function dayGan(y,m,d){return (jdn(y,m,d)+9)%10;} // 0=甲 ~ 9=癸
 const GAN=['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
 const GAN_KR=['갑','을','병','정','무','기','경','신','임','계'];
+const GAN_CUTE=['큰나무','새싹','큰불','촛불','큰산','텃밭','무쇠','보석','큰물','이슬']; // 한자 대신 쉬운 표기
+const GAN_EN=['bigtree','sprout','bonfire','candle','mountain','field','iron','gem','wave','dew']; // 이미지 파일명 속성(영문)
+const ZEN=['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces']; // 이미지 파일명 별자리(영문)
+// 캐릭터별 크기 보정 (튀는 애만 조정) — 0큰나무1새싹2큰불3촛불4큰산5텃밭6무쇠7보석8큰물9이슬
+const SCALE_ADJ=[1,0.95,0.95,1,1,1,1,0.95,1,1];
+// 속성 한줄 성격 (매칭 표시용)
+const SDESC=['추진력 있는 든든한 리더형','유연하고 눈치 빠른 처세형','열정 넘치는 관종 직진형','섬세하고 헌신적인 집착형','묵직하고 안정적인 뚝심형','잘 챙기는 걱정 많은 포용형','직설적이고 의리 있는 돌격형','완벽주의 예민한 세련형','자유롭고 스케일 큰 변덕형','눈치·통찰 뛰어난 섬세형'];
 const GAN_OH=[0,0,1,1,2,2,3,3,4,4]; // 0목1화2토3금4수
 const OH_NAME=['wood','fire','earth','metal','water'];
 const OH_KR=['목','화','토','금','수'], OH_EMOJI=['🌳','🔥','⛰️','⚔️','🌊'];
@@ -252,6 +325,29 @@ const YEAR=[
  '촉이 맞아떨어지는 해. 담아둔 감정 한번 풀어주기 💧'
 ];
 function statBar(g){return `<div class="statbar">`+STAT[g].map((v,i)=>`<div class="stat"><span>${STAT_LAB[i]}</span><b>${v}</b></div>`).join('')+`</div>`}
+// ===== 🎴 120 조합 멘트 [천간10][별자리12] (0양 1황소 2쌍둥이 3게 4사자 5처녀 6천칭 7전갈 8사수 9염소 10물병 11물고기) =====
+const COMBO=[
+ // 0 甲 고집불통 나무
+ ['고집에 추진력까지 붙어서 한번 꽂히면 아무도 못 말리는 폭주 기관차ㅋㅋ','뿌리까지 고집인 대형 고집나무. 널 설득하는 덴 10년 걸림','고집인데 말도 많아서 토론으로 널 이길 사람이 없음','내 사람 고집스럽게 챙기는 든든한 가장나무. 근데 품는 방식이 좀 강압적','리더 기질+주인공병이라 무조건 내가 중심이어야 하는 왕나무','고집+완벽주의라 "내 방식이 맞고 정확하기까지 함" 하는 피곤한 유형ㅋㅋ','고집인데 결정은 못 해서 밀어붙이다 멈칫하는 모순덩어리','한번 정한 건 죽어도 안 바꾸는 집념의 거목. 뿌리째 뒤끝','고집 세게 자유를 추구함. "내 맘대로 할 거야"가 신념','고집+야망이라 목표 정하면 산도 밀어버리는 불도저 중의 불도저','남들 다 아니라 해도 내 길 가는 독고집 아웃사이더 나무','겉은 여린데 심지는 고집인 반전나무. 우유부단한 척 다 정해놨음'],
+ // 1 乙 심약초
+ ['여린데 추진력은 있어서 조용히 치고 나가는 반전 새싹','유연한 척 사실 제일 안 움직이는 은근 고집 넝쿨','눈치+재치 만렙. 상황 따라 변신하는 처세의 신','다정+공감이라 남 마음 다 받아주는 힐링 넝쿨. 근데 혼자 소진됨','여린데 인정은 받고 싶어서 은근 관종끼 있는 새싹ㅋㅋ','눈치+디테일로 분위기·실수 다 캐치하는 초고성능 센서','유연+균형이라 둥글둥글 좋은데 결정은 남한테 떠넘김','겉은 여린데 속은 집착. 조용히 한 사람한테 올인하는 넝쿨','눈치 보면서도 자유 추구. 맞춰주는 척하다 훌쩍 떠남','유연한 처세+현실 야망이라 조용히 윗선까지 가는 전략가 새싹','맞춰주는 척 사실 제일 독특한 생각 하는 아싸 넝쿨','공감+감성 끝판왕. 남 아픔 다 흡수하는 여린 물풀'],
+ // 2 丙 불꽃 방화범
+ ['불+불이라 브레이크 없는 열정폭탄. 시동 걸리면 다 태움ㅋㅋ','화려한데 은근 뚝심 있어서 오래 타는 장작불','텐션+재치로 어디서든 분위기 터뜨리는 핵인싸 불꽃','뜨거운데 정도 많아서 내 사람 활활 챙기는 따뜻한 모닥불','관종+주인공이라 존재 자체가 스포트라이트인 메인캐릭터','열정인데 디테일까지 챙겨서 "화려하고 꼼꼼한" 완벽 불꽃','화려한데 눈치 봐서 수위 조절하는 세련된 불꽃','열정+집착이라 한번 타오르면 끝을 보는 강렬한 불','불+자유라 어디로 튈지 모르는 들불. 신나면 끝까지 감','화려한데 야망도 커서 성공으로 증명하는 불꽃','튀는데 독특하게 튐. 남들과 다른 방식으로 주목받는 불','뜨거운데 감성적이라 분위기에 확 취하는 로맨틱 불꽃'],
+ // 3 丁 집착 불강아지
+ ['은근 집착인데 표현은 직진. 좋으면 티 다 내는 솔직촛불','조용히 오래 타는 집착. 한번 켜진 마음 10년은 감','섬세한데 변덕도 있어서 챙기다 삐지다 반복하는 촛불','헌신+정이라 내 사람한테 다 쏟아붓는 희생형 촛불','티 안 내는 척 사실 제일 관심받고 싶은 모순촛불ㅋㅋ','섬세+완벽주의로 디테일까지 챙기는 완벽한 집착러','은근 챙기는데 결정 못 해서 혼자 끙끙대는 촛불','집착+집착이라 한 사람한테 평생 올인하는 찐 집착촛불','집착인데 자유도 원해서 밀당 아닌 밀당하는 촛불','조용히 헌신하며 현실도 챙기는 알뜰살뜰 촛불','챙기는 방식이 독특한, 남과 다른 애정표현 촛불','섬세+감성이라 상대 마음 다 읽는 공감 촛불'],
+ // 4 戊 왕고구마산
+ ['느긋한데 한번 움직이면 못 막는 거대한 산사태ㅋㅋ','산+황소라 세상에서 제일 안 움직이는 초대형 고집','묵직한데 머리는 빨라서 느린 척 다 계산해둔 산','든든함+정이라 다 받쳐주는 진짜 큰바위 가장산','묵직한데 자존심도 커서 "날 무시하지 마" 하는 산','뚝심+디테일로 느리지만 완벽하게 쌓는 믿음직한 산','안정+균형이라 중재 잘하는 평화로운 산','느긋한데 꽂히면 집요한, 조용히 끝까지 파는 산','묵직한데 자유 원함. 느릿느릿 세계일주하는 산','뚝심+야망이라 느려도 결국 정상 밟는 대기만성 산','안정 추구하면서 생각은 독특한 마이웨이 산','든든한데 감성적이라 속정 깊은 포근한 산'],
+ // 5 己 걱정벌레 밭
+ ['걱정 많은데 추진력 있어서 걱정하면서도 일단 하는 밭','걱정+뚝심이라 느긋하게 챙기는 실속파 옥토','걱정 많은데 머리 빨라서 시나리오 100개 돌리는 밭','포용+정이라 다 품고 다 챙기는 엄마 밭. 근데 소진 주의','챙기면서 인정도 받고 싶은, 생색 안 내다 서운한 밭','걱정+디테일로 안 심은 씨앗까지 검수하는 초불안 밭ㅋㅋ','걱정+균형이라 남 눈치 보며 다 맞추다 지치는 밭','챙김이 깊어서 한번 품은 사람 끝까지 책임지는 밭','걱정 많은데 자유도 원해서 걱정 안 하려 애쓰는 밭','실속+야망이라 알뜰하게 미래 쌓는 현실 농부','챙기는데 방식이 독특한, 오지랖도 개성 있는 밭','걱정+공감이라 남 아픔까지 걱정하는 여린 옥토'],
+ // 6 庚 무대뽀 돌쇠
+ ['직설+돌격이라 생각 전에 몸이 나가는 돌격 무쇠ㅋㅋ','직설인데 뚝심 있어서 묵직하게 밀어붙이는 무쇠','돌직구+재치로 팩폭도 웃기게 하는 무쇠','무뚝뚝한데 정 많아서 내 사람엔 다 퍼주는 의리 무쇠','직설+자존심이라 당당하게 할 말 다 하는 대장 무쇠','직설+디테일로 정확한 팩폭으로 빈틈 찌르는 무쇠','직설인데 균형도 봐서 그나마 부드러운 돌쇠','의리+집념이라 한번 내 편은 끝까지 가는 찐 의리무쇠','돌격+자유라 거침없이 질러대는 야생 무쇠','직설+야망이라 목표 위해 밀어붙이는 추진 무쇠','직설인데 생각이 독특해서 남다른 소신파 무쇠','무뚝뚝한데 속은 여린 츤데레 무쇠ㅋㅋ'],
+ // 7 辛 예민발작 보석
+ ['예민+추진력이라 완벽 추구하며 밀어붙이는 보석','완벽주의+뚝심이라 느려도 흠 없이 깎는 명품 보석','예민+재치로 센스 미쳤는데 변덕도 있는 보석','시크한 척 정 많은, 내 사람엔 세심한 따뜻한 보석','완벽+자존심이라 반짝이고 인정받고 싶은 보석','완벽+디테일이라 흠 하나 못 참는 궁극의 완벽주의 보석ㅋㅋ','세련+균형이라 미적 감각 최고인 우아한 보석','예민+집착이라 꽂힌 건 완벽히 파고드는 강렬한 보석','예민한데 자유 원함. 완벽 추구하다 훌쩍 떠나는 보석','완벽+야망이라 디테일로 정상까지 가는 명품 보석','예민한데 취향 독특한, 남다른 감각의 보석','예민+감성이라 상처 잘 받는 유리멘탈 보석'],
+ // 8 壬 변덕 폭풍의언덕
+ ['자유+추진력이라 거침없이 흐르는 대형 급류ㅋㅋ','자유 원하는데 은근 고집, 큰물인데 자기 길만 가는','변덕+재치로 종잡을 수 없는데 재밌는 변화무쌍 물결','자유로운데 정 많아서 품을 땐 다 품는 넓은 바다','스케일+자존심이라 판 크게 벌이는 대양 같은 존재감','자유로운데 디테일도 챙기는 의외로 꼼꼼한 큰물','변덕+균형이라 이리저리 재다 흐르는 우유부단 물결','자유로운데 꽂히면 집착, 깊은 심연 품은 바다','자유+자유라 어디로 튈지 아무도 모르는 방랑 파도','스케일+야망이라 큰 그림 그리는 전략적 대해','변덕+독특이라 세상에 없는 발상 하는 아싸 물결','자유+감성이라 감정 따라 흐르는 몽환적 바다'],
+ // 9 癸 뒤끝 왕심해
+ ['눈치 빠른데 추진력도 있어서 조용히 치고 나가는 이슬','통찰+뚝심이라 깊이 보고 묵직하게 가는 심해','눈치+재치로 분위기 다 읽고 받아치는 센스 물방울','통찰+정이라 내 사람 속마음까지 읽어주는 깊은 물','눈치 보면서도 인정은 받고 싶은, 조용한 관종 이슬ㅋㅋ','통찰+디테일로 작은 것도 다 캐치하는 분석의 심해','눈치+균형이라 분위기 맞추다 자기 맘 숨기는 물방울','통찰+집착이라 깊이 파고 뒤끝까지 오래가는 진짜 심해빌런','눈치 빠른데 자유 원함. 읽으면서도 훌쩍 떠나는 이슬','통찰+야망이라 조용히 판 읽고 올라가는 전략 심해','눈치+독특이라 남다른 통찰로 세상 보는 아싸 물방울','통찰+감성이라 공감·직관 미친 몽환의 심해']
+];
 const MBTI=['INTJ','INTP','ENTJ','ENTP','INFJ','INFP','ENFJ','ENFP','ISTJ','ISFJ','ESTJ','ESFJ','ISTP','ISFP','ESTP','ESFP'];
 const MBTI_PCT={ISFJ:14,ESFJ:12,ISTJ:12,ISFP:9,ESTJ:8,ESFP:7,ENFP:7,ISTP:5,INFP:4,ESTP:4,INTP:3,ENTP:3,ENFJ:2.5,INTJ:2,ENTJ:1.8,INFJ:1.5};
 
@@ -276,6 +372,31 @@ function zodiac(m,d){
   // [경계일, 그날이상이면 해당 궁 idx] — 미만이면 직전 궁
   const t=[[20,10],[19,11],[21,0],[20,1],[21,2],[22,3],[23,4],[23,5],[23,6],[24,7],[23,8],[22,9]];
   const [cut,idx]=t[m-1]; return d<cut?(idx+11)%12:idx;}
+// 별자리 선 도형(배경에 깔 SVG) + 원소색
+const ZGEO=[
+ {p:[[28,62],[46,52],[64,46],[80,52]],l:[[0,1],[1,2],[2,3]]},
+ {p:[[22,68],[40,58],[54,52],[70,42],[66,24],[82,46]],l:[[0,1],[1,2],[2,3],[3,4],[2,5]]},
+ {p:[[34,24],[37,46],[40,72],[62,24],[59,46],[56,72]],l:[[0,1],[1,2],[3,4],[4,5],[0,3],[2,5]]},
+ {p:[[50,26],[50,50],[32,66],[68,66]],l:[[0,1],[1,2],[1,3]]},
+ {p:[[28,42],[38,28],[52,30],[58,46],[72,62],[46,64]],l:[[0,1],[1,2],[2,3],[3,4],[4,5],[5,0]]},
+ {p:[[22,34],[40,44],[54,38],[68,52],[80,70]],l:[[0,1],[1,2],[2,3],[3,4]]},
+ {p:[[30,64],[50,46],[70,64],[50,24]],l:[[0,1],[1,2],[1,3]]},
+ {p:[[22,32],[34,38],[46,46],[56,58],[64,72],[76,66]],l:[[0,1],[1,2],[2,3],[3,4],[4,5]]},
+ {p:[[26,64],[44,54],[62,46],[78,34],[60,28],[70,50]],l:[[0,1],[1,2],[2,3],[3,4],[2,5]]},
+ {p:[[26,44],[44,32],[62,46],[74,66],[46,64]],l:[[0,1],[1,2],[2,3],[3,4],[4,0]]},
+ {p:[[24,46],[38,38],[50,48],[62,38],[76,48]],l:[[0,1],[1,2],[2,3],[3,4]]},
+ {p:[[26,66],[42,56],[56,50],[44,36],[34,26],[72,42]],l:[[0,1],[1,2],[2,3],[3,4],[2,5]]}
+];
+const ELHEX=['#e0654a','#c99a3c','#3f9ec4','#4a78d4']; // 불 흙 공기 물
+const ZDUST=[[10,18],[88,24],[16,80],[84,76],[70,12],[8,50],[92,54]];
+function constellation(zi){
+  const z=ZOD[zi], g=ELHEX[z.el], G=ZGEO[zi];
+  const lines=G.l.map(([a,b])=>`<line x1="${G.p[a][0]}" y1="${G.p[a][1]}" x2="${G.p[b][0]}" y2="${G.p[b][1]}" stroke="${g}" stroke-width="0.8" stroke-opacity=".4" stroke-linecap="round"/>`).join('');
+  const stars=G.p.map(p=>`<g><circle cx="${p[0]}" cy="${p[1]}" r="3.4" fill="${g}" opacity=".25"/><circle cx="${p[0]}" cy="${p[1]}" r="1.6" fill="#fff"/></g>`).join('');
+  const gl=G.p.slice(0,3).map(p=>`<path d="M${p[0]} ${p[1]-4} L${p[0]} ${p[1]+4} M${p[0]-4} ${p[1]} L${p[0]+4} ${p[1]}" stroke="#fff" stroke-width="0.6" stroke-linecap="round" opacity=".8"/>`).join('');
+  const dust=ZDUST.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="0.8" fill="${g}" opacity=".5"/>`).join('');
+  return `<svg class="zbg" viewBox="0 0 100 100">${dust}${lines}${stars}${gl}</svg>`;
+}
 // ===== 🧬 MBTI 16 수식어 (형용사 + 행동 한 줄) =====
 const MBTI_MOD={
  INTJ:{adj:'전략가',line:'머릿속에 10년치 시뮬 돌려놓고 혼자 결론 내는 타입'},
@@ -307,21 +428,53 @@ function build(info){
   // 곱하기 풀네임: {MBTI수식어} {천간별명}
   const full=mod.adj+' '+t.nick;
   return {g,oh,ohn,t,gan:GAN[g],ganKR:GAN_KR[g],zi,z,mod,full,mbti:info.mbti,
-    rare:grade+'·상위'+Math.round(pct)+'%',
-    combo:GAN[g]+OH_KR[oh]+' × '+info.mbti+' × '+z.e+z.n,
-    lab:OH_EMOJI[oh]+' '+OH_KR[oh]+'·'+GAN[g]+'·'+info.mbti+'·'+z.n};
+    rare:grade+'·상위'+Math.round(pct)+'%', ssr:grade==='SSR',
+    combo:GAN_CUTE[g]+' × '+info.mbti+' × '+z.n,
+    lab:OH_EMOJI[oh]+' '+GAN_CUTE[g]+'·'+info.mbti+'·'+z.n};
 }
 function cardHTML(c,mini){
-  const o=OH[c.ohn], sz=mini?'':'';
-  const imgstyle=c.t.big?'max-width:90%;transform:scale(1.12)':'';
+  const o=OH[c.ohn], adj=SCALE_ADJ[c.g]||1;
   return `<div class="card"${mini?' style="max-width:130px"':''}>
     <div class="bg" style="background:${o.bg}"></div>
+    ${mini?'':constellation(c.zi)}
+    <div class="char"><img class="cimg" src="assets/char/${ZEN[c.zi]}_${GAN_EN[c.g]}.png" data-fb="assets/char_gan${c.g}.png" alt="${c.t.nick}" crossorigin="anonymous" style="transform:scale(${adj})"></div>
     <img class="frame" src="assets/frame_${c.ohn}.png" alt="${c.gan}" crossorigin="anonymous">
-    <div class="char"><img src="assets/char_gan${c.g}.png" alt="${c.t.nick}" crossorigin="anonymous" style="${imgstyle}"></div>
-    <div class="holo"></div>
-    <div class="rare" style="background:${o.rc};font-size:${mini?'7px':'10px'}">${c.rare}</div>
-    <div class="nick" style="color:${o.nc};font-size:${mini?'11px':'17px'}">${c.t.nick}</div>
+    ${mini?'':'<div class="holo"></div>'}
+    ${c.rare?`<div class="rare${c.ssr?' ssr':''}" style="${c.ssr?'':'background:'+o.rc+';'}font-size:${mini?'6px':'9px'}">${c.ssr?'✨':''}${c.rare}</div>`:''}
+    <div class="nick" style="color:${o.nc};font-size:${mini?'5px':'14px'}">${c.t.nick}</div>
   </div>`;
+}
+
+// ===== 💚 잘 맞는 / 💔 안 맞는 카드 (120장 중 매칭: 오행+별자리원소+천간합/충) =====
+function matchAttr(c){
+  const myEl=c.z.el, list=[];
+  for(let g2=0;g2<10;g2++)for(let z2=0;z2<12;z2++){
+    if(g2===c.g&&z2===c.zi)continue; // 나 자신 카드 제외
+    list.push({g2,z2, sc: ohRel(c.oh,GAN_OH[g2]).s*0.6 + elRel(myEl,ZOD[z2].el).s*0.4 + ganRel(c.g,g2).d});
+  }
+  list.sort((a,b)=>b.sc-a.sc);
+  const nm=o=>`${OH_EMOJI[GAN_OH[o.g2]]} ${GAN_CUTE[o.g2]}·${ZOD[o.z2].n}`;
+  const b=list[0], w=list[list.length-1];
+  // 찰떡 MBTI (자기 빼고 16개 중 최고)
+  let bm='',bs=-1; for(const m of MBTI){if(m===c.mbti)continue; const s=mbtiSc(c.mbti,m); if(s>bs){bs=s;bm=m}}
+  return {good:{g:b.g2,zi:b.z2,name:nm(b)}, bad:{g:w.g2,zi:w.z2,name:nm(w)}, mbti:bm};
+}
+
+// 매칭 속성용 미니 카드 (이미지 포함)
+function matchMini(g,zi){
+  const oh=GAN_OH[g], ohn=OH_NAME[oh];
+  // 풀카드를 통째로 축소(transform) → 글자도 비율대로 작아져 모바일 최소폰트 제한 통과
+  return '<div class="miniwrap">'+cardHTML({g,zi,oh,ohn,z:ZOD[zi],t:TG[g],gan:GAN[g],rare:'',ssr:false}, 0)+'</div>';
+}
+
+// ===== 🔮 통합 리딩 (천간+별자리+MBTI 한 호흡으로) =====
+function reading(c){
+  const zline=(c.z.line||'').trim();
+  const mline=(c.mod.line||'').replace(/ㅋㅋ+$/,'').trim();
+  let r=`${c.t.punch} ${zline}에, ${mline}까지. `
+   +`그래서 ${COMBO[c.g][c.zi]}<br>→ 딱 <b>${c.full}</b>, 이게 너야.`;
+  // ㅋㅋ 제거 + 문장부호 정리
+  return r.replace(/\s*ㅋㅋ+/g,'. ').replace(/\.\s*\./g,'.').replace(/\s+\./g,'.').replace(/\.\s*(<br>)/g,'$1').replace(/\s{2,}/g,' ').trim();
 }
 
 // ===== 궁합 =====
@@ -335,12 +488,19 @@ function elRel(a,b){if(a===b)return{s:80,r:'같은 원소'};
   if((a==0&&b==3)||(a==3&&b==0))return{s:52,r:'불vs물'}; // 상극
   if((a==1&&b==2)||(a==2&&b==1))return{s:55,r:'흙vs공기'};
   return{s:66,r:'무난 원소'}}
+// 천간합(五合)/천간충 — 더 디테일한 보정
+function ganRel(a,b){
+  const hap=[[0,5],[1,6],[2,7],[3,8],[4,9]];   // 甲己 乙庚 丙辛 丁壬 戊癸
+  const chung=[[0,6],[1,7],[2,8],[3,9]];        // 甲庚 乙辛 丙壬 丁癸
+  const has=arr=>arr.some(([x,y])=>(a===x&&b===y)||(a===y&&b===x));
+  if(has(hap))return{d:6,r:'천간합 ✨'};
+  if(has(chung))return{d:-6,r:'천간충 ⚡'};
+  return{d:0,r:''}}
 function compat(A,B){const cA=build(A),cB=build(B);
-  const om=ohRel(cA.oh,cB.oh), mm=mbtiSc(A.mbti,B.mbti), em=elRel(cA.z.el,cB.z.el);
-  const s=seed(A.birth+A.mbti+'x'+B.birth+B.mbti);
-  // 3축 가중: 오행 40 + MBTI 35 + 별자리 25
-  let sc=Math.round(om.s*0.40+mm*0.35+em.s*0.25);
-  sc=Math.max(41,Math.min(99,sc+(s%7)-3));return{sc,om,mm,em,cA,cB}}
+  const om=ohRel(cA.oh,cB.oh), mm=mbtiSc(A.mbti,B.mbti), em=elRel(cA.z.el,cB.z.el), gr=ganRel(cA.g,cB.g);
+  // 완전 고정(랜덤X): 오행 38 + MBTI 34 + 별자리 23 + 천간합/충 보정
+  let sc=Math.round(om.s*0.38+mm*0.34+em.s*0.23)+gr.d;
+  sc=Math.max(41,Math.min(99,sc));return{sc,om,mm,em,gr,cA,cB}}
 function matchLine(sc,om){if(sc>=90)return '천생연분 🔥 '+om.r+'이라 만나면 시너지 폭발. 이 조합 놓치면 손해ㅋㅋ';
   if(sc>=75)return '꽤 잘 맞아 💫 '+om.r+'. 티격태격해도 결국 붙어있을 케미';
   if(sc>=60)return '나쁘지 않아 🙂 '+om.r+'이라 노력하면 좋아지는 사이';
@@ -349,6 +509,8 @@ function matchLine(sc,om){if(sc>=90)return '천생연분 🔥 '+om.r+'이라 만
 
 // ===== UI =====
 const $=id=>document.getElementById(id);
+// 별자리별 캐릭터 이미지 없으면 기본 속성 캐릭터로 폴백
+function bindFb(root){root&&root.querySelectorAll('img.cimg[data-fb]').forEach(im=>{im.onerror=()=>{im.onerror=null;im.src=im.dataset.fb}})}
 let sex='남',mbti=null,myInfo=null,friendInfo=null;
 (function(){let t=null;try{t=localStorage.getItem('gh-theme')}catch(e){}if(t)document.documentElement.setAttribute('data-theme',t);
 $('themeBtn').onclick=()=>{const c=document.documentElement.getAttribute('data-theme');const dk=c?c==='dark':matchMedia('(prefers-color-scheme:dark)').matches;const n=dk?'light':'dark';document.documentElement.setAttribute('data-theme',n);try{localStorage.setItem('gh-theme',n)}catch(e){}}})();
@@ -363,25 +525,29 @@ function showMy(info){
   myInfo=info;try{localStorage.setItem('gh-me',JSON.stringify(info))}catch(e){}
   const c=build(info);
   $('myCardWrap').innerHTML=cardHTML(c)+statBar(c.g)+tagRow(c.g)+`<div class="clab">${c.lab}</div>`;
-  $('comboHdr').innerHTML=`<div class="full">🎴 "${c.full}"</div><div class="combo">${c.combo}</div>`;
-  $('myPunch').innerHTML='💥 '+c.t.punch;
-  $('myMbti').innerHTML=`<b style="color:var(--fg)">${c.mod.adj}</b> — ${c.mod.line}`;
-  $('starLbl').textContent=`${c.z.e} ${c.z.n} (${EL_KR[c.z.el]})`;
-  $('myStar').textContent=c.z.line;
+  bindFb($('myCardWrap'));
+  $('comboHdr').innerHTML=`<div class="full">🎴 "${c.full}"</div>`;
+  $('myReading').innerHTML='🔮 '+reading(c);
   $('myRage').textContent=RAGE[c.g];
   $('myLove').textContent=c.t.love;$('myStr').textContent=c.t.str;$('myWeak').textContent=c.t.weak;
   $('myJob').textContent=JOB[c.g];$('myYear').textContent=YEAR[c.g];
+  const ma=matchAttr(c);
+  $('myGood').innerHTML=matchMini(ma.good.g,ma.good.zi)+`<div class="mtxt"><b>${ma.good.name} <span style="color:var(--accent)">× ${ma.mbti}</span></b><div class="msub">${SDESC[ma.good.g]}</div></div>`;
+  $('myBad').innerHTML=matchMini(ma.bad.g,ma.bad.zi)+`<div class="mtxt"><b>${ma.bad.name}</b><div class="msub">${SDESC[ma.bad.g]}</div></div>`;
+  bindFb($('myGood'));bindFb($('myBad'));
   $('inputCard').classList.add('hidden');$('myResult').classList.add('show');$('matchResult').classList.remove('show');
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function showMatch(A,B){
   const r=compat(A,B);
   $('vsRow').innerHTML=`<div class="mini">${cardHTML(r.cA,1)}</div><div class="heart">💗</div><div class="mini">${cardHTML(r.cB,1)}</div>`;
+  bindFb($('vsRow'));
   $('scoreN').innerHTML=r.sc+'<small>점</small>';
   $('scoreLbl').textContent=r.sc>=85?'천생연분급 💖':r.sc>=70?'꽤 잘 맞음 💫':r.sc>=55?'노력하면 굿 🙂':'극과극 매력 🌗';
   const bar=v=>v>=85?'🟢':v>=65?'🟡':'🔴';
+  const ganTxt=r.gr.r?` · ${r.gr.d>0?'🟢':'🔴'} <b>천간</b> ${r.gr.r}`:'';
   $('matchPunch').innerHTML='💘 '+matchLine(r.sc,r.om)
-    +`<div class="axis">${bar(r.om.s)} <b>오행</b> ${r.om.r} · ${bar(r.mm)} <b>MBTI</b> ${r.mm>=75?'찰떡':r.mm>=60?'무난':'상극매력'} · ${bar(r.em.s)} <b>별자리</b> ${r.em.r}</div>`;
+    +`<div class="axis">${bar(r.om.s)} <b>오행</b> ${r.om.r} · ${bar(r.mm)} <b>MBTI</b> ${r.mm>=75?'찰떡':r.mm>=60?'무난':'상극매력'} · ${bar(r.em.s)} <b>별자리</b> ${r.em.r}${ganTxt}</div>`;
   setTimeout(()=>$('gaugeFill').style.width=r.sc+'%',100);
   $('inputCard').classList.add('hidden');$('myResult').classList.remove('show');$('matchResult').classList.add('show');
   window.scrollTo({top:0,behavior:'smooth'});
@@ -409,6 +575,58 @@ $('goBtn').onclick=()=>{const i=readInput();if(i)showMy(i)};
 $('redoBtn').onclick=()=>{$('myResult').classList.remove('show');$('inputCard').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})};
 $('redoBtn2').onclick=()=>location.href=location.origin+location.pathname;
 $('shareBtn').onclick=()=>{if(myInfo)doShare(myInfo)};$('shareBtn2').onclick=()=>{if(myInfo)doShare(myInfo)};
+
+// ===== 👥 그룹 궁합 =====
+const MBTIOPT=MBTI.map(m=>`<option value="${m}">${m}</option>`).join('');
+function gmemberRow(){return `<div class="gmember">
+  <input class="gname" placeholder="이름" maxlength="6">
+  <input class="gbirth" type="date" min="1930-01-01" max="2025-12-31" value="2000-01-01">
+  <select class="gsex"><option value="남">남</option><option value="여">여</option></select>
+  <select class="gmbti"><option value="" disabled selected>MBTI</option>${MBTIOPT}</select>
+  <button type="button" class="grm">✕</button></div>`}
+function gRender(n){$('gList').innerHTML=Array.from({length:n},gmemberRow).join('')}
+gRender(3);
+$('gList').addEventListener('click',e=>{const b=e.target.closest('.grm');if(!b)return;
+  if($('gList').querySelectorAll('.gmember').length<=2){toast('최소 2명은 있어야 해');return}
+  b.closest('.gmember').remove()});
+$('gAddBtn').onclick=()=>{if($('gList').querySelectorAll('.gmember').length>=6){toast('최대 6명까지!');return}
+  $('gList').insertAdjacentHTML('beforeend',gmemberRow())};
+function gColor(sc){return sc>=80?'#43b07d':sc>=65?'#e0a94a':'#d9647a'}
+function readGroup(){const rows=[...$('gList').querySelectorAll('.gmember')],ms=[];
+  for(const r of rows){const birth=r.querySelector('.gbirth').value,mbti=r.querySelector('.gmbti').value;
+    if(!birth||!mbti)return null;
+    const name=r.querySelector('.gname').value.trim()||('속성'+(ms.length+1));
+    const sex=r.querySelector('.gsex').value,a=birth.split('-').map(Number);
+    ms.push({name,birth,y:a[0],m:a[1],d:a[2],mbti,sex})}
+  return ms}
+function drawGroup(){
+  const ms=readGroup();if(!ms){toast('모두 생일·MBTI 채워줘');return}
+  if(ms.length<2){toast('최소 2명!');return}
+  const cards=ms.map(build),pairs=[];
+  for(let i=0;i<ms.length;i++)for(let j=i+1;j<ms.length;j++){const r=compat(ms[i],ms[j]);pairs.push({i,j,sc:r.sc,r})}
+  const N=ms.length,cx=150,cy=150,R=100;
+  const pos=ms.map((m,k)=>{const a=-Math.PI/2+2*Math.PI*k/N;return[cx+R*Math.cos(a),cy+R*Math.sin(a)]});
+  const sorted=[...pairs].sort((a,b)=>b.sc-a.sc),bestKey=sorted[0].i+'-'+sorted[0].j;
+  const lines=pairs.map(p=>{const P1=pos[p.i],P2=pos[p.j],c=gColor(p.sc),isBest=(p.i+'-'+p.j)===bestKey;
+    const mx=(P1[0]+P2[0])/2,my=(P1[1]+P2[1])/2;
+    return `<line x1="${P1[0]}" y1="${P1[1]}" x2="${P2[0]}" y2="${P2[1]}" stroke="${c}" stroke-width="${(1+p.sc/22).toFixed(1)}" stroke-opacity="${isBest?.95:.5}" stroke-linecap="round"/><text x="${mx}" y="${my-2}" text-anchor="middle" font-size="10" fill="${c}" font-weight="700">${p.sc}</text>`}).join('');
+  const nodes=ms.map((m,k)=>{const P=pos[k],c=cards[k],col=OH[c.ohn].rc;
+    return `<g><circle cx="${P[0]}" cy="${P[1]}" r="21" fill="${col}"/><text x="${P[0]}" y="${P[1]+6}" text-anchor="middle" font-size="19">${OH_EMOJI[c.oh]}</text><text class="gnm" x="${P[0]}" y="${P[1]+37}" text-anchor="middle" font-size="11" font-weight="700">${m.name}</text></g>`}).join('');
+  $('gSvg').innerHTML=lines+nodes;
+  const avg=Math.round(pairs.reduce((s,p)=>s+p.sc,0)/pairs.length);
+  $('gTeam').innerHTML=`<div class="n">${avg}</div><div class="l">팀 케미 점수 (평균)</div>`;
+  $('gRank').innerHTML=sorted.map((p,idx)=>{const medal=idx===0?'🥇 ':idx===sorted.length-1&&sorted.length>1?'💔 ':'';
+    return `<div class="prow"><span>${medal}${ms[p.i].name} <small>×</small> ${ms[p.j].name}${p.r.gr.r?`<span class="tag">${p.r.gr.r}</span>`:''}</span><b style="color:${gColor(p.sc)}">${p.sc}</b></div>`}).join('');
+  $('groupCard').classList.add('hidden');$('groupResult').classList.add('show');window.scrollTo({top:0,behavior:'smooth'})}
+$('gGoBtn').onclick=drawGroup;
+$('gRedoBtn').onclick=()=>{$('groupResult').classList.remove('show');$('groupCard').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})};
+// 모드 전환
+$('modeTab').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  [...$('modeTab').children].forEach(x=>x.setAttribute('aria-pressed',x===b));
+  const g=b.dataset.mode==='group';
+  $('inputCard').classList.toggle('hidden',g);
+  $('groupCard').classList.toggle('hidden',!g);
+  $('myResult').classList.remove('show');$('matchResult').classList.remove('show');$('groupResult').classList.remove('show')});
 
 (function(){const p=new URLSearchParams(location.search).get('c');if(p){friendInfo=dec(p);if(friendInfo){const fc=build(friendInfo);
   $('friendBn').classList.remove('hidden');$('friendBn').innerHTML=`${OH_EMOJI[fc.oh]} <b>${fc.t.nick}</b> 님이 궁합을 신청했어요!<br>네 정보 넣으면 <b>천생연분 점수</b>가 나와 💘`;
